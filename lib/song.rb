@@ -12,9 +12,21 @@ class Song
   end
   
   def self.create
-    new_song = self.new 
-    new_song.save
-    new_song
+    new_song = self.new #create
+    new_song.save #save
+    new_song #return the object 
+  end 
+  
+  def self.new_by_name(song_name)
+    new_song = self.new #create 
+    new_song.name = song_name #name 
+    new_song #return 
+  end 
+  
+  def self.create_by_name 
+    new_song = self.new #create 
+    new_song.name = song_name #name 
+    song_name.save #return 
   end 
   
 end

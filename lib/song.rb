@@ -33,16 +33,25 @@ class Song
   end
 
   def self.find_by_name(song_name) #find methods usually require iteration
-    self.all.detect { |x| x.name == song_name} #passes a string and searches all for string
+    self.all.detect{ |x| x.name == song_name} #passes a string and searches all song objects for a particular string
+    # or
+    # @@all.detect{ |x| x.name == song_name}
   end
 
   def self.find_or_create_by_name(song_name)
-    self.find_by_name(song_name)
+    self.find_by_name(song_name) || #evaluates left side and if false evaluates right side of OR
     self.create_by_name(song_name)
+    # or below, but above is cleaner and DRY
+    # if self.find_by_name(song_name)
+    #   self.find_by_name(song_name)
+    # else
+    #   self.create_by_name(song_name)
+    # end
   end
 
-  def self.alphabetical(song_name)
-    @@all.sort_by!(song_name)
+  def self.alphabetical
+    # @@all.sort{ |a, b| a.name <=> b.name } #compare current and next and works its way through the array and sorts
+    @@all.sort_by{ |song| song.name}
   end
 
   def self.new_from_filename(file_name)
@@ -51,7 +60,7 @@ class Song
   end
 
   def self.create_from_filename(file_name) #accepts a filename in the format of " - .mp3", for example "Taylor Swift - Blank Space.mp3". The Song.create_from_filename class method should not only parse the filename correctly but should also save the Song instance that was created.
-    self.create_by_name
+    # self.create_by_name
   end
 
   def self.destroy_all

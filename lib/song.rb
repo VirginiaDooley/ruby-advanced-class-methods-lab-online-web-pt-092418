@@ -54,13 +54,23 @@ class Song
     @@all.sort_by{ |song| song.name}
   end
 
-  def self.new_from_filename(file_name)
-    # self.new =
-    # artist_name =
+  def self.new_from_filename(filename)
+    # "<Artist Name> - <Song Name>.mp3"
+    split_filename = filename.chop.chop.chop.chop.split(" - ")
+    new_song = Song.new
+    new_song.name = split_filename[1]
+    new_song.artist_name = split_filename[0]
+    new_song
   end
 
-  def self.create_from_filename(file_name) #accepts a filename in the format of " - .mp3", for example "Taylor Swift - Blank Space.mp3". The Song.create_from_filename class method should not only parse the filename correctly but should also save the Song instance that was created.
-    # self.create_by_name
+  def self.create_from_filename(filename) #class method should not only parse the filename correctly but should also save the Song instance that was created.
+    # "<Artist Name> - <Song Name>.mp3"
+    split_filename = filename.chop.chop.chop.chop.split(" - ")
+    new_song = Song.new
+    new_song.name = split_filename[1]
+    new_song.artist_name = split_filename[0]
+    new_song.save
+    new_song
   end
 
   def self.destroy_all
